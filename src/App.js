@@ -6,6 +6,8 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import NavBar from './components/NavBar/NavBar';
 import { CartProvider } from './context/CartContext';
 import Cart from './components/Cart/Cart';
+import Product from './components/Product/Product';
+import Formulario from './components/Formulario/Formulario';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
               <Route path='*' element={<h1> 404 No Encontrado</h1>} />
           </Routes>
         </CartProvider>
+        <Product />
+        <Formulario />
       </BrowserRouter>
     </div>
   );
