@@ -7,9 +7,9 @@ const Product = () => {
 
     useEffect(() => {
 
-        //const myProduct = query(collection(db, "inventario"));
+        const myProduct = query(collection(db, "inventario"));
 
-        const myProduct = query(collection(db, "inventario"), where("price","<",10000))
+        // const myProduct = query(collection(db, "inventario"), where("price","<",10000));
 
         getDocs(myProduct)
             .then(response => {
@@ -33,6 +33,9 @@ const Product = () => {
                     product.map(prod => (
                         <div key={prod.id} >
                             <h2>{prod.name}</h2>
+                            <picture>
+                                <img className='imgProducto' src={prod.img} alt={prod.name}/>
+                            </picture>
                             <p>Precio : $ {prod.price}</p>
                             <p>Cantidad : $ {prod.stock}</p>
                             <button onClick={() => descountStock(prod)}>Comprar</button>

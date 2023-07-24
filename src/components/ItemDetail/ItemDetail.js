@@ -2,6 +2,7 @@ import ItemCount from "../ItemCount/ItemCount"
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from "../../context/CartContext"
+import './ItemDetail.css'
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
 
@@ -20,6 +21,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
     }
 
     return (
+        <div className='cardProducto'>
         <article>
             <header>
                 <h2>
@@ -27,7 +29,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                 </h2>
             </header>
             <picture>
-                <img src={img} alt={name} />
+                    <img src={img} alt={name} className='imgProducto'/>
             </picture>
             <section>
                 <p>
@@ -50,7 +52,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                 }
             </footer>
         </article>
-
+        </div>
     )
     
 }

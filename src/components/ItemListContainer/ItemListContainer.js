@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts, getProductsByCategory } from '../../asyncMock'
 import ItemList from '../ItemList/ItemList'
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from '../../services/config';
+
 
 const ItemListContainer = ({ greeting }) => {
 
@@ -11,15 +13,17 @@ const ItemListContainer = ({ greeting }) => {
 
   useEffect(() => {
 
-    const asyncfunc = categoryId ? getProductsByCategory : getProducts 
+    const myProduct = categoryId ? query(collection(db, "inventario"), where ("category", "==",categoryId)) : collection(db,"inventario");
 
-    asyncfunc(categoryId)
+      getDocs(myProduct)
       .then(response => {
-          setProducts(response)
+        const nuevosProductos = response.docs.map(doc => {
+          const data = doc.data();
+          return {id: doc.id, ...data}
       })
-      .catch(error => {
-          console.log(error)
+        setProducts(nuevosProductos);
       })
+      .catch(error => console.log(error))
   }, [categoryId])
 
   return (
